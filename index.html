@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanulya Bandara | Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #0f172a;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background particles */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Header Styles */
+    header {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: profilePulse 2s ease-in-out infinite;
+    }
+
+    .profile-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+      z-index: 1;
+    }
+
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image:hover img {
+      transform: scale(1.05);
+    }
+
+    @keyframes profilePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+      50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(45deg, #fff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      font-weight: 300;
+      color: white;
+    }
+
+    /* Rest of your existing CSS remains the same */
+    /* Main Content */
+    main {
+      max-width: 1000px;
+      margin: -10px auto 0;
+      padding: 0 20px 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideInUp 0.6s ease-out forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      margin-bottom: 20px;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    h2 {
+      color: #1e293b;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    p {
+      color: #475569;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      line-height: 1.7;
+    }
+
+    /* Tags */
+    .tags-container {
+      margin-top: 25px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      margin: 5px 10px 5px 0;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .tag:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Skills Progress Bars */
+    .skill-item {
+      margin: 20px 0;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+
+    .skill-bar {
+      background: #e2e8f0;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 4px;
+      transition: width 2s ease-in-out;
+      animation: progressFill 2s ease-in-out;
+    }
+
+    @keyframes progressFill {
+      from { width: 0; }
+    }
+
+    /* Contact Section */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: rgba(102, 126, 234, 0.1);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      background: rgba(102, 126, 234, 0.2);
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-right: 15px;
+      font-size: 18px;
+    }
+
+    .contact-item a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item a:hover {
+      color: #667eea;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.2rem; }
+      .card { padding: 25px; margin-bottom: 20px; }
+      main { margin-top: -30px; }
+      .contact-info { grid-template-columns: 1fr; }
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-top: 5px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Animated Background -->
+  <div class="bg-animation" id="bgAnimation"></div>
+
+  <header>
+    <div class="header-content">
+      <div class="profile-image">
+        <img src="Spongebob.jpg" alt="SB">
+      </div>
+      <h1>Sanulya Bandara</h1>
+      <p class="subtitle">Student | Aspiring Pediatrician | Future Healthcare Leader</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="section-icon">👋</div>
+      <h2>About Me</h2>
+      <p>Hello! I'm Sanulya Bandara, a dedicated student at <strong>Horizon College International</strong> with a passion for learning and making a positive impact. My academic journey is driven by curiosity and the desire to excel in everything I pursue.</p>
+      <p>English Literature holds a special place in my heart, as it allows me to explore the depths of human expression and creativity through words and stories. I believe that literature not only enhances our understanding of the world but also develops critical thinking skills essential for any profession.</p>
+    </section>
+
+    <section class="card">
+      <div class="section-icon">🏥</div>
+      <h2>My Ambition</h2>
+      <p>My dream is to become a <strong>pediatrician</strong> and dedicate my career to improving children's health and wellbeing. I'm deeply passionate about working with young patients and their families, providing compassionate care that makes a real difference in their lives.</p>
+      <p>I believe that every child deserves access to quality healthcare, and I'm committed to pursuing the rigorous academic path required to achieve this goal. My interest in pediatric medicine stems from a genuine love for helping others and a desire to contribute meaningfully to society.</p>
+      
+      <div class="skill-item">
+        <div class="skill-name">Academic Excellence</div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 92%;"></div>
+        </div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-name">Communication Skills</div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 88%;"></div>
+        </div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-name">Leadership Potential</div>
+        <div class="skill-bar">
+          <div class="skill-progress" style="width: 85%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-icon">🎮</div>
+      <h2>Interests & Hobbies</h2>
+      <p>Beyond academics, I enjoy engaging in activities that help me relax and develop different skills. <strong>Forza Horizon 4</strong> is my favorite video game, offering an exciting virtual racing experience that helps me unwind after intensive study sessions.</p>
+      <p>Gaming isn't just entertainment for me—it enhances my hand-eye coordination, strategic thinking, and provides a healthy outlet for stress relief. I appreciate how modern games can be both entertaining and intellectually stimulating.</p>
+      
+      <div class="tags-container">
+        <div class="tag">English Literature</div>
+        <div class="tag">Forza Horizon 4</div>
+        <div class="tag">Healthcare Advocacy</div>
+        <div class="tag">Academic Research</div>
+        <div class="tag">Community Service</div>
+        <div class="tag">Critical Thinking</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-icon">📧</div>
+      <h2>Get In Touch</h2>
+      <p>I'm always open to connecting with like-minded individuals, potential mentors, or anyone interested in discussing healthcare, literature, or academic pursuits. Feel free to reach out!</p>
+      
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <strong>Email:</strong><br>
+            <a href="mailto:sanulya@example.com">sanulya@example.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🎓</div>
+          <div>
+            <strong>School:</strong><br>
+            Horizon College International
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌟</div>
+          <div>
+            <strong>Interests:</strong><br>
+            Medicine, Literature, Gaming
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sanulya Bandara. Crafted with passion and purpose.</p>
+  </footer>
+
+  <script>
+    // Loading screen
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.getElementById('loading').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('loading').style.display = 'none';
+        }, 500);
+      }, 1500);
+    });
+
+    // Create floating particles
+    function createParticles() {
+      const bgAnimation = document.getElementById('bgAnimation');
+      const particleCount = 20;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 10 + 5;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        
+        bgAnimation.appendChild(particle);
+      }
+    }
+
+    // Smooth scrolling for better UX
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      
+      // Add intersection observer for animations
+      const cards = document.querySelectorAll('.card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      cards.forEach(card => {
+        observer.observe(card);
+      });
+
+      // Parallax effect on scroll
+      window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('header');
+        const speed = scrolled * 0.5;
+        parallax.style.transform = `translateY(${speed}px)`;
+      });
+
+      // Tag click animations
+      document.querySelectorAll('.tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+          this.style.animation = 'none';
+          setTimeout(() => {
+            this.style.animation = 'profilePulse 0.6s ease-in-out';
+          }, 10);
+        });
+      });
+
+      // Typing effect for subtitle
+      const subtitle = document.querySelector('.subtitle');
+      const text = subtitle.textContent;
+      subtitle.textContent = '';
+      let i = 0;
+      
+      setTimeout(() => {
+        const typeWriter = setInterval(() => {
+          if (i < text.length) {
+            subtitle.textContent += text.charAt(i);
+            i++;
+          } else {
+            clearInterval(typeWriter);
+          }
+        }, 50);
+      }, 1000);
+    });
+
+    // Add some interactive elements
+    document.addEventListener('mousemove', function(e) {
+      const particles = document.querySelectorAll('.particle');
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      
+      particles.forEach((particle, index) => {
+        const speed = (index + 1) * 0.5;
+        const newX = x * speed;
+        const newY = y * speed;
+        
+        particle.style.transform = `translate(${newX}px, ${newY}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
